@@ -2,7 +2,7 @@
 /**
  * Plugin name: AutoUpdaterのテスト
  * Description: fugafugahogehoge
- * Version: 0.0.2
+ * Version: 0.0.3
  *
  * @package autoupdate_test
  * @author kutsu123
