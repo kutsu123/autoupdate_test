@@ -1,0 +1,38 @@
+{
+  "name": "autoupdate_test",
+  "description": "Auto Updateのテストです",
+  "author": "kustu123",
+  "license": "GPL-2.0+",
+  "main": "index.js",
+  "devDependencies": {
+    "@wordpress/env": "^5.7.0",
+    "@wordpress/scripts": "^24.6.0",
+    "cpy-cli": "^4.2.0",
+    "del-cli": "^5.0.0",
+    "glob": "^8.0.3",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "yarn-upgrade-all": "^0.7.1"
+  },
+  "scripts": {
+    "export:wp-content:themes": "yarn cli 'cp -r wp-content/themes .export/wp-content'",
+    "export:wp-content:uploads": "yarn cli 'cp -r wp-content/uploads .export/wp-content'",
+    "export:wp-content": "yarn cli 'rm -rf .export/wp-content' && mkdir -p .export/wp-content/uploads && run-p 'export:wp-content:*'",
+    "export:db": "mkdir -p .export/sql && yarn wp 'db export .export/sql/local.sql'",
+    "export": "run-p 'export:*'",
+    "import:wp-content:themes": "yarn cli 'cp -r .export/wp-content/themes wp-content'",
+    "import:wp-content:uploads": "yarn cli 'cp -r .export/wp-content/uploads wp-content'",
+    "import:wp-content": "run-p 'import:wp-content:*'",
+    "import:db": "yarn wp 'db import .export/sql/local.sql'",
+    "import": "run-p 'import:*'",
+    "wp-env": "wp-env",
+    "start": "wp-env start && open http://localhost:8888",
+    "stop": "yarn export && wp-env stop",
+    "cli": "wp-env run cli",
+    "wp": "wp-env run cli wp"
+  },
+  "volta": {
+    "node": "14.21.1",
+    "yarn": "3.2.4"
+  }
+}
